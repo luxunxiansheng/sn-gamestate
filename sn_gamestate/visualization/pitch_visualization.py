@@ -247,13 +247,12 @@ class PitchVisualizationEngine(Callback):
                 detection,
                 patch,
                 color_bbox,
+                print_id,
+                print_confidence,
                 self.cfg.bbox.thickness,
                 self.cfg.text.font,
                 self.cfg.text.scale,
                 self.cfg.text.thickness,
-                color_text,
-                print_confidence,
-                print_id,
             )
 
         # keypoints, confidences, skeleton
