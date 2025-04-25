@@ -149,41 +149,37 @@ Before running the baseline for the first time, you will need to clone the proje
 #### Clone the repositories
 First git clone this repository, and the [TrackLab framework](https://github.com/TrackingLaboratory/tracklab) *in adjacent directories* : 
 ```bash
-mkdir soccernet
-cd soccernet
 git clone https://github.com/SoccerNet/sn-gamestate.git
-git clone https://github.com/TrackingLaboratory/tracklab.git
 ```
 
 > [!NOTE]
 > If you are using an IDE (like PyCharm or VS Code), we suggest creating a single project with `soccernet` as root directory.
 > Instructions : [PyCharm](https://www.jetbrains.com/help/pycharm/configuring-project-structure.html) and [VS Code](https://code.visualstudio.com/docs/editor/multi-root-workspaces)
 
-#### Option 1: Install using Poetry
-1. Install poetry : https://python-poetry.org/docs/#installing-with-the-official-installer
+#### [Recommended] Option 1: Install using UV
+1. Install uv : https://docs.astral.sh/uv/getting-started/installation/
 2. Install the dependencies : 
 ```bash
 cd sn-gamestate
-poetry install
-poetry run mim install mmcv==2.0.1
-poetry shell
+uv venv --python 3.9
+uv pip install -e .
+uv run mim install mmcv==2.0.1
 ```
 
-To enter the virtual environment created by Poetry, you can either use `poetry shell`,
-or prefix all commands by `poetry run`.
+To enter the virtual environment created by uv, you can either use `source .venv/bin/activate`,
+or prefix all commands by `uv run`.
 
 #### Option 2: Install using conda
 1. Install conda : https://docs.conda.io/projects/miniconda/en/latest/
 2. Create a new conda environment : 
 ```bash 
-conda create -n tracklab pip python=3.10 pytorch==1.13.1 torchvision==0.14.1 pytorch-cuda=11.7 -c pytorch -c nvidia -y
+conda create -n tracklab pip python=3.9 pytorch==1.13.1 torchvision==0.14.1 pytorch-cuda=11.7 -c pytorch -c nvidia -y
 conda activate tracklab
 ```
 3. Install all the dependencies with : 
 ```bash
 cd sn-gamestate
 pip install -e .
-pip install -e ../tracklab
 mim install mmcv==2.0.1
 ```
 
@@ -196,7 +192,7 @@ git -C ../tracklab pull
 ```
 
 After updating, you should rerun the installation of the dependencies in case they are updated 
-(either running `poetry install` or *both* `pip install`'s).
+(either running `uv run -U -cn soccernet` or *both* `pip install -U -e .`'s).
 
 We will advertise big updates on the [soccernet discord](https://discord.com/invite/cPbqf2mAwF).
 
@@ -268,14 +264,14 @@ You will need to set up some variables before running the code in [soccernet.yam
 #### Command Line
 Finally, run the SoccerNet Game State Reconstruction baseline with the following command :
 ```bash
-python -m tracklab.main -cn soccernet
+uv run tracklab -cn soccernet
 ```
 By default, this command will perform game state reconstruction on one SoccerNet validation sequence, display results in a .mp4 video saved on disk and print the final performance metric.
 As a reminder, the dataset and all model's weights will be downloaded automatically on the first run.
 
 You can find all possible configuration groups at the top when running the following command :  
 ```bash
-python -m tracklab.main --help
+uv run tracklab --help
 ```
 
 You can have a look at the default parameters in [soccernet.yaml](sn_gamestate/configs/soccernet.yaml).
@@ -313,7 +309,7 @@ We employ a [SoccerNet fork](https://github.com/SoccerNet/sn-trackeval) of the [
 Evaluation is performed automatically when using our TrackLab library, but you can still perform evaluation within your own codebase using our [TrackEval fork](https://github.com/SoccerNet/sn-trackeval) (more information in the fork README).
 
 ## Troubleshooting
-If you encounter issues after upgrading to the latest version, do not forget to run `poetry install`  or `pip install -e .` and `pip install -e ../tracklab` to keep your environment up to date.
+If you encounter issues after upgrading to the latest version, do not forget to run `uv run -U tracklab -cn soccernet` and `uv pip install -e .` to keep your environment up to date.
 Feel free to open a GitHub issue or contact us on Discord if you need further assistance.
 
 ### FAQ
@@ -321,7 +317,7 @@ We will try to gather interesting questions and answer them in the [FAQ](FAQ.md)
 
 ## References
 
- - Bbox detection : YOLOv8 [[Code](https://github.com/ultralytics/ultralytics)]
+ - Bbox detection : YOLOv11 [[Code](https://github.com/ultralytics/ultralytics)]
  - Re-Identification : PRTReid [[Paper](https://arxiv.org/abs/2401.09942)] [[Code](https://github.com/VlSomers/Prtreid)] | BPBreID [[Paper](https://arxiv.org/abs/2211.03679)][[Code](https://github.com/VlSomers/bpbreid)]
  - Camera calibration & field localisation : TVCalib [[Paper](https://arxiv.org/abs/2207.11709)] [[Code](https://github.com/MM4SPA/tvcalib/tree/main)]
  - Jersey number recognition : MMOCR [[Paper](https://arxiv.org/abs/2108.06543)] [[Code](https://github.com/open-mmlab/mmocr)]
