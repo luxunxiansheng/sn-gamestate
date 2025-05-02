@@ -2,6 +2,8 @@ defaults:
   - colors # For more specific color tuning
 
 colors:
+  # Estimated number of objects to track to generate colors that are visually
+  # distinct from one another when using "track_id" or colormap name.
   cmap: 22
   team:  # colors can be selected by RGB or null
     no_team: null

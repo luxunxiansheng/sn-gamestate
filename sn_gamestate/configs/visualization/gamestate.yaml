@@ -25,11 +25,11 @@ visualizers:
 
 # Color settings for visualization.
 colors:
-  # Choose the color you want to display:
+  # Choose the color to display:
   # - null: No display.
   # - RGB code: A color in [R, G, B] format.
   # - team: A color based on the assigned team (left or right - can be modified in colors_gs file).
-  # - track_id: A color based on the tracking ID (!when id is available).
+  # - track_id: A color based on the tracking ID (for prediction or ground_truth only).
   default:
     no_id: null  # Color setting for objects with no ID (null means no display).
     prediction: "team"  # Color setting for tracked predictions, based on team.
