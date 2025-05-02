@@ -146,15 +146,11 @@ Tracklab will create a `.mp4` video showcasing the game state reconstruction res
 ### 1. Installing TrackLab and the GameState baseline 
 Before running the baseline for the first time, you will need to clone the project and setup the environment as described below.
 
-#### Clone the repositories
-First git clone this repository, and the [TrackLab framework](https://github.com/TrackingLaboratory/tracklab) *in adjacent directories* : 
+#### Clone the sn-gamestate repository
+First git clone this repository: 
 ```bash
 git clone https://github.com/SoccerNet/sn-gamestate.git
 ```
-
-> [!NOTE]
-> If you are using an IDE (like PyCharm or VS Code), we suggest creating a single project with `soccernet` as root directory.
-> Instructions : [PyCharm](https://www.jetbrains.com/help/pycharm/configuring-project-structure.html) and [VS Code](https://code.visualstudio.com/docs/editor/multi-root-workspaces)
 
 #### [Recommended] Option 1: Install using UV
 1. Install uv : https://docs.astral.sh/uv/getting-started/installation/
@@ -192,7 +188,7 @@ git -C ../tracklab pull
 ```
 
 After updating, you should rerun the installation of the dependencies in case they are updated 
-(either running `uv run -U -cn soccernet` or *both* `pip install -U -e .`'s).
+(either running `uv run -U -cn soccernet` or `pip install -U -e .`).
 
 We will advertise big updates on the [soccernet discord](https://discord.com/invite/cPbqf2mAwF).
 
@@ -307,6 +303,31 @@ We provide the Tracker State of the baseline for the [validation set](https://ze
 ### Evaluation
 We employ a [SoccerNet fork](https://github.com/SoccerNet/sn-trackeval) of the [official TrackEval](https://github.com/JonathonLuiten/TrackEval) library to evaluate the GS-HOTA performance.
 Evaluation is performed automatically when using our TrackLab library, but you can still perform evaluation within your own codebase using our [TrackEval fork](https://github.com/SoccerNet/sn-trackeval) (more information in the fork README).
+
+
+### Contributing or adapting Tracklab
+
+If you'd like to contribute to sn-gamestate or tracklab (or you want to change Tracklab behaviors),
+you'll need to install a local tracklab version, in the parent directory next to sn-gamestate : 
+```bash
+git clone https://github.com/TrackingLaboratory/tracklab.git
+```
+You then can point you existing sn-gamestate installation to this local version:
+```bash
+cd sn-gamestate
+uv add ../tracklab
+```
+To watch changes, you have to add this section to the sn-gamestate [pyproject.toml](pyproject.toml):
+```toml
+[tool.uv]
+reinstall-package = ["tracklab"]
+```
+
+If you're working on a slow drive, you can also manipulate the python `sys.path` :
+```bash
+echo "/absolute/path/to/tracklab" > .venv/lib/python3.9/site-packages/tracklab_dev.pth
+```
+
 
 ## Troubleshooting
 If you encounter issues after upgrading to the latest version, do not forget to run `uv run -U tracklab -cn soccernet` and `uv pip install -e .` to keep your environment up to date.
