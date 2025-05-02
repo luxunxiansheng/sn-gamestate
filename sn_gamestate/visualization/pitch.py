@@ -14,11 +14,11 @@ log = logging.getLogger(__name__)
 pitch_file = Path(__file__).parent / "Radar.png"
 
 
-class PitchVisualizer(ImageVisualizer):
+class Pitch(ImageVisualizer):
     def draw_frame(self, image, detections_pred, detections_gt, image_pred, image_gt):
         draw_pitch(image, detections_pred, detections_gt, image_pred)
 
-class RadarVisualizer(ImageVisualizer):
+class Radar(ImageVisualizer):
     def draw_frame(self, image, detections_pred, detections_gt, image_pred, image_gt):
         for detection, group in zip([detections_pred, detections_gt], ["Predictions", "Ground Truth"]):
             if detection is not None and "bbox_pitch" in detection:

@@ -1,2 +1,2 @@
-from .pitch import PitchVisualizer, RadarVisualizer
-from .players import PlayerVisualizer, PlayerEllipseVisualizer, CompletePlayerEllipseVisualizer
+from .pitch import Pitch, Radar
+from .players import Player, PlayerEllipse, CompletePlayerEllipse

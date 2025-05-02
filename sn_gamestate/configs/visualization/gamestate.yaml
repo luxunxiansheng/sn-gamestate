@@ -6,21 +6,22 @@ save_videos: True
 
 visualizers:
   # Available Visualizers:
-  # - Detections: DefaultDetectionVisualizer, FullDetectionVisualizer,
-  #               DebugDetectionVisualizer, EllipseDetectionVisualizer
-  #               SimpleDetectionStatsVisualizer, DetectionStatsVisualizer
-  # - Keypoints: DefaultKeypointsVisualizer, FullKeypointsVisualizer
-  # - Images: FrameCountVisualizer
-  # - Pitch: PitchVisualizer
-  # - Players: PlayerVisualizer, PlayerEllipseVisualizer, CompletePlayerEllipseVisualizer
+  # - Detections: DefaultDetection, FullDetection, DebugDetection, EllipseDetection,
+  #               SimpleDetectionStats, DetectionStats
+  # - Keypoints: DefaultKeypoints, FullKeypoints
+  # - Tracking: TrackingLine # shows tracking history
+  # - Images: FrameCount, IgnoreRegions
+  # - Players: Player, PlayerEllipse, CompletePlayerEllipse
+  # - Pitch: Pitch
+  # - Radar: Radar
   frame_counter:
-    _target_: tracklab.visualization.FrameCountVisualizer
+    _target_: tracklab.visualization.FrameCount
   pitch:
-    _target_: sn_gamestate.visualization.PitchVisualizer
+    _target_: sn_gamestate.visualization.Pitch
   players:
-    _target_: sn_gamestate.visualization.CompletePlayerEllipseVisualizer
+    _target_: sn_gamestate.visualization.CompletePlayerEllipse
   radar:
-    _target_: sn_gamestate.visualization.RadarVisualizer
+    _target_: sn_gamestate.visualization.Radar
 
 # Color settings for visualization.
 colors:

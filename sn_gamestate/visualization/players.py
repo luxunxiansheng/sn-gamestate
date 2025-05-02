@@ -3,7 +3,7 @@ import pandas as pd
 
 from distinctipy import get_rgb256
 
-from tracklab.visualization import Visualizer, DefaultDetectionVisualizer, EllipseDetectionVisualizer, get_fixed_colors
+from tracklab.visualization import Visualizer, DefaultDetection, EllipseDetection, get_fixed_colors
 from tracklab.utils.cv2 import draw_text
 
 import logging
@@ -38,10 +38,13 @@ class TeamVisualizer(Visualizer):
                 color = self.colors[color_type][cmap_key]
         return color
 
-class PlayerEllipseVisualizer(TeamVisualizer, EllipseDetectionVisualizer):
+class Player(TeamVisualizer, DefaultDetection):
     pass
 
-class CompletePlayerEllipseVisualizer(TeamVisualizer, EllipseDetectionVisualizer):
+class PlayerEllipse(TeamVisualizer, EllipseDetection):
+    pass
+
+class CompletePlayerEllipse(TeamVisualizer, EllipseDetection):
     def __init__(self, display_track_id=True, display_jersey=True, display_role=True, display_team=False):
         self.display_list = [
             "track_id" if display_track_id else None,
@@ -107,6 +110,3 @@ def pprint(key, value):
         }.get(value, "")
     else:
         return ""
-
-class PlayerVisualizer(TeamVisualizer, DefaultDetectionVisualizer):
-    pass
