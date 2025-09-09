@@ -17,7 +17,9 @@
 		"no_proxy": "${localEnv:no_proxy}"
 	  },
 
-	"postCreateCommand": "git config --global user.email ornot2008@yahoo.com && git config --global user.name ornot-devcontainer",  
+	"workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
+	"postCreateCommand": "git config --global user.email ornot2008@yahoo.com && git config --global user.name ornot-devcontainer && uv venv --clear --python 3.9 && uv pip install -e . && uv run mim install mmcv==2.0.1",  
 
 	"customizations": {
 		"vscode": {
@@ -40,8 +42,5 @@
 				"ms-toolsai.datawrangler"
 			]
 		}
-	},
-
-
-
+	}
 }
